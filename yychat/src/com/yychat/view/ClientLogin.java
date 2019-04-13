@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import com.yychat.controller.ClientConnetion;
+import com.yychat.model.Message;
 import com.yychat.model.User;
 
 public class ClientLogin extends JFrame implements ActionListener {//类名：ClientLogin,继承
@@ -87,10 +88,16 @@ public class ClientLogin extends JFrame implements ActionListener {//类名：Clien
 			user.setPassword(password);
 			
 			//密码验证密码是123456验证成功，否则验证失败
-			new ClientConnetion().loginValidate(user);
+			Message mess=new ClientConnetion().loginValidate(user);
+			if(mess.getMessageType().equals(Message.message_LoginSuccess)){
+				new FriendList(userName);
+				this.dispose();
+			}else{
+				JOptionPane.showMessageDialog(this,"密码错误");
+			}
 
-			new FriendList(userName);
-			this.dispose();
+			
+			
 		}	
 	}
 }

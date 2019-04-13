@@ -192,7 +192,7 @@ public class FriendList  extends JFrame implements ActionListener,MouseListener{
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

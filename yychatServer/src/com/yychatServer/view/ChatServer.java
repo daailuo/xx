@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import controller.StartServer;
+import com.chatServer.controller.StartServer;
 
 public class ChatServer extends JFrame implements ActionListener{
 	JButton jb1;

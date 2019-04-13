@@ -1,4 +1,4 @@
-package controller;
+package com.chatServer.controller;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -17,6 +17,7 @@ public class StartServer {
 		try {
 				ss=new ServerSocket(3456);//服务器端口监听3456端口
 			 System.out.println("服务器已经启动，监听3456端口");
+			 while(true){
 			 s=ss.accept();//等待客户端建立连接
 			 System.out.println(s);//输出连接Socket对象
 			 
@@ -33,14 +34,18 @@ public class StartServer {
 			 if(user.getPassword().equals("123456")){//不能用“==”，对象比较
 				//消息传递 创建一个Message对象
 				
-				 mess.setMessageTapy("1");//验证通过
+				 mess.setMessageType(Message.message_LoginSuccess);//验证通过
 			 }
 			 else{
-				mess.setMessageTapy("0");//验证不通过
+				mess.setMessageType(Message.message_Loginfailure);//验证不通过
 				 
 			 }
 			 ObjectOutputStream oos=new ObjectOutputStream(s.getOutputStream());
 			 oos.writeObject(mess);
+			 //如何接收聊天信息？另建一个线程来接收聊天信息
+			 new ServerReceiverThread(s).start();
+			 
+			 }
 			 
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
